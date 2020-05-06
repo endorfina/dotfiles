@@ -1,0 +1,8 @@
+bashrc.sh ~/.bashrc
+
+tmux.conf ^/tmux/tmux.conf
+nvim.vim ^/nvim/init.vim
+neovim_color_theme.vim ^/nvim/colors/cyber.vim
+
+alacritty.yml ^/alacritty/alacritty.yml
+

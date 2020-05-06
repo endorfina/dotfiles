@@ -1,0 +1,41 @@
+export HISTCONTROL=ignoredups
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+export CARGO_HOME=$XDG_DATA_HOME/cargo
+export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
+export LESSKEY=$XDG_CONFIG_HOME/less/lesskey
+export LESSHISTFILE=$XDG_CACHE_HOME/less/history
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
+
+export PATH=$HOME/.cargo/bin:$PATH:$HOME/.local/bin
+export VISUAL=nvim
+export EDITOR=$VISUAL
+export TERMINAL=alacritty
+export BROWSER=firefox
+
+[[ $USER = 'endorfina' ]] && export PS1="\[\e[38;5;255m\]👻 \[\e[38;5;240m\][\[\e[38;5;245m\]\W\[\e[38;5;240m\]]\[\e[38;5;079m\]\$\[\e[0m\] "
+
+alias dog='tail -n+1'
+alias :e='nvim 2>/dev/null'
+alias :bd='exit'
+alias ta='[[ -n $XDG_CONFIG_HOME ]] && if tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf has &>/dev/null; then tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u attach && exit; else tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u && exit; fi'
+alias neofetch="clear; echo; neofetch | sed -E \"s~$USER.*\$~[DATA EXPUNGED]~\""
+alias lis='ls -lGh'
+alias gis='git status'
+alias gic='git commit'
+alias giu='git add -u'
+alias gik='if git stash; then git pull -r; git stash apply; fi'
+
+remove_carriage_returns()
+{
+    find . -maxdepth 2 -type f -name '*.?pp' | while read -r filename
+    do
+        echo "${filename#./}"
+        sed -i 's~\r$~~' "$filename"
+    done
+}
+
+. ~/.config/broot/launcher/bash/br
