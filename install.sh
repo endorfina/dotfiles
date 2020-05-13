@@ -19,7 +19,7 @@ fi
 
 die()
 {
-  echo >&2 '💀' "${color_red}${PROGNAME} !!${color_norm} $*"
+  printf >&2 '💀 %s\n' "${color_red}${PROGNAME} !!${color_norm} $*"
   exit 1
 }
 
@@ -43,7 +43,7 @@ sed -E \
     -e 's~[[:space:]]*#.*$~~' \
     -e '/^[[:space:]]*$/d' \
     -e 's~[[:space:]]\~/~'" $HOME/~" \
-    -e 's~[[:space:]]\^/~'" $HOME/.config/~" \
+    -e 's~[[:space:]]\^/~'" ${XDG_CONFIG_HOME:-$HOME/.config}/~" \
     -e 's~[[:space:]]\!/~'" $HOME/.local/bin/~" \
     link_list.txt \
     | while read -r line
@@ -61,7 +61,7 @@ do
             || loud mkdir -p "$dest_dirname"
 
         loud cp "$source_file" "$dest_file"
-        echo
+
     else
 
         message "skipping '$dest_file'"
