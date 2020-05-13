@@ -10,7 +10,9 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
 
-export PATH=$HOME/.cargo/bin:$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin
+[[ -d $CARGO_HOME/bin ]] && PATH=$CARGO_HOME/bin:$PATH
+
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export TERMINAL=alacritty
@@ -35,14 +37,25 @@ alias ggd='git diff'
 alias ggdc='git diff --cached'
 alias ggl='git log'
 alias ggsps='if git stash; then git pull -r; git stash apply; fi'
+alias ignore='echo >> .gitignore'
 
 remove_carriage_returns()
 {
     find . -maxdepth 2 -type f -name '*.?pp' | while read -r filename
     do
-        echo "${filename#./}"
+        printf '%s\n' "${filename#./}"
         sed -i 's~\r$~~' "$filename"
     done
+}
+
+todos()
+{
+    find "${1-.}" -type f -exec grep -H 'TODO:' '{}' '+'
+}
+
+edit_modified()
+{
+    git status --short | sed -En '/^M/{s~^[A-Z]+[[:space:]]*~~;p;}' | sort | uniq | xargs "echo"
 }
 
 . ~/.config/broot/launcher/bash/br
