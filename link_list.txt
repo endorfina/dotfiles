@@ -6,3 +6,5 @@ neovim_color_theme.vim ^/nvim/colors/cyber.vim
 
 alacritty.yml ^/alacritty/alacritty.yml
 
+focus.sh !/focus
+

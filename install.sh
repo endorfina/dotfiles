@@ -44,7 +44,8 @@ sed -E \
     -e '/^[[:space:]]*$/d' \
     -e 's~[[:space:]]\~/~'" $HOME/~" \
     -e 's~[[:space:]]\^/~'" $HOME/.config/~" \
-    copy_list.txt \
+    -e 's~[[:space:]]\!/~'" $HOME/.local/bin/~" \
+    link_list.txt \
     | while read -r line
 do
     source_file=scripts/${line%% *}

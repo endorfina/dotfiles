@@ -79,7 +79,7 @@ endif
 
 " Git commands
     noremap <leader>s <Esc>:!git status<Enter>
-    noremap <leader>r <Esc>:!git reset HEAD %<Enter>
+    noremap <leader>r <Esc>:!git restore --staged %<Enter>
     noremap <leader>R <Esc>:!git restore %<Enter>
     noremap <leader>d <Esc>:!git diff %<Enter>
     noremap <leader>c <Esc>:!git diff --cached %<Enter>
@@ -93,6 +93,7 @@ endif
     noremap <leader>e <Esc>:s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<Enter>
 
     noremap <leader>b <Esc>:make<Enter>
+    noremap <leader>B <Esc>:make run<Enter>
     noremap <leader># <Esc>:!shellcheck %<Enter>
 
 

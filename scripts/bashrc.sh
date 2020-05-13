@@ -16,18 +16,25 @@ export EDITOR=$VISUAL
 export TERMINAL=alacritty
 export BROWSER=firefox
 
-[[ $USER = 'endorfina' ]] && export PS1="\[\e[38;5;255m\]👻 \[\e[38;5;240m\][\[\e[38;5;245m\]\W\[\e[38;5;240m\]]\[\e[38;5;079m\]\$\[\e[0m\] "
+[[ $USER = 'endorfina' ]] && export PS1="\[\e[38;5;255m\]🦩 \[\e[38;5;240m\][\[\e[38;5;245m\]\W\[\e[38;5;240m\]]\[\e[38;5;079m\]\$\[\e[0m\] "
 
 alias dog='tail -n+1'
 alias :e='nvim 2>/dev/null'
 alias :bd='exit'
-alias ta='[[ -n $XDG_CONFIG_HOME ]] && if tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf has &>/dev/null; then tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u attach && exit; else tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u && exit; fi'
-alias neofetch="clear; echo; neofetch | sed -E \"s~$USER.*\$~[DATA EXPUNGED]~\""
+alias ta='if tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf has &>/dev/null; then tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u attach && exit; else tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u && exit; fi'
+alias neofetch='clear && echo && neofetch | sed "s~'"$USER"'.*$~[DATA EXPUNGED]~"'
 alias lis='ls -lGh'
-alias gis='git status'
-alias gic='git commit'
-alias giu='git add -u'
-alias gik='if git stash; then git pull -r; git stash apply; fi'
+alias ggs='git status'
+alias ggc='git commit'
+alias ggo='git checkout'
+alias gga='git add'
+alias ggu='git add -u'
+alias ggr='git restore'
+alias ggrs='git restore --staged'
+alias ggd='git diff'
+alias ggdc='git diff --cached'
+alias ggl='git log'
+alias ggsps='if git stash; then git pull -r; git stash apply; fi'
 
 remove_carriage_returns()
 {
