@@ -45,10 +45,10 @@ sed -E \
     -e 's~[[:space:]]\~/~'" $HOME/~" \
     -e 's~[[:space:]]\^/~'" ${XDG_CONFIG_HOME:-$HOME/.config}/~" \
     -e 's~[[:space:]]\!/~'" $HOME/.local/bin/~" \
-    link_list.txt \
+    "${1:-link_list.txt}" \
     | while read -r line
 do
-    source_file=scripts/${line%% *}
+    source_file=sources/${line%% *}
     dest_file=${line#* }
 
     if test "$source_file" -nt "$dest_file"
