@@ -33,3 +33,5 @@ hi SpellCap       ctermfg=Black ctermbg=DarkGrey
 hi SpellRare      ctermfg=Black ctermbg=DarkBlue
 hi SpellLocal     ctermfg=Black ctermbg=DarkGreen
 hi MatchParen     ctermfg=White ctermbg=DarkGrey
+
+hi SignColumn     ctermbg=NONE

@@ -59,7 +59,7 @@ if emoji#available()
 endif
 
 " Focus button for focused writing
-    noremap <leader>f :Goyo<Enter>
+    nnoremap <leader>f :Goyo<Enter>
 
 " Automatically deletes all trailing whitespace on save
     autocmd BufWritePre * %s/\s\+$//e
@@ -67,33 +67,37 @@ endif
 
 " Netrw configuration
     autocmd FileType netrw nnoremap ? :help netrw-quickmap<Enter>
-    noremap <leader>x <Esc>:e .<Enter>
+    nnoremap <leader>x :e .<Enter>
     let g:netrw_winsize = 25
 
 " Buffer navigation
-    noremap <leader>h <Esc>:bp<Enter>
-    noremap <leader>l <Esc>:bn<Enter>
+    nnoremap <leader>h :bp<Enter>
+    nnoremap <leader>l :bn<Enter>
 
 " Turn on spellchecking
-    noremap <leader>L <Esc>:set spell spelllang=en_us<Enter>
+    nnoremap <leader>L :set spell spelllang=en_us<Enter>
 
 " Git commands
-    noremap <leader>s <Esc>:!git status<Enter>
-    noremap <leader>r <Esc>:!git restore --staged %<Enter>
-    noremap <leader>R <Esc>:!git restore %<Enter>
-    noremap <leader>d <Esc>:!git diff %<Enter>
-    noremap <leader>c <Esc>:!git diff --cached %<Enter>
-    noremap <leader>a <Esc>:!git add %<Enter>
-    noremap <leader>u <Esc>:!git add -u<Enter>
+    nnoremap <leader>s :!git status<Enter>
+    nnoremap <leader>r :!git restore --staged %<Enter>
+    nnoremap <leader>R :!git restore %<Enter>
+    nnoremap <leader>d :!git diff %<Enter>
+    nnoremap <leader>c :!git diff --cached %<Enter>
+    nnoremap <leader>a :!git add %<Enter>
+    nnoremap <leader>u :!git add -u<Enter>
 
 " Comment
     noremap <leader>/ I// <Esc>
 
-    noremap <leader>g <Esc>:GitGutterToggle<Enter>
-    noremap <leader>e <Esc>:s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<Enter>
+" Use extended regex
+    nnoremap / /\v
+    vnoremap / /\v
 
-    noremap <leader>b <Esc>:make<Enter>
-    noremap <leader>B <Esc>:make run<Enter>
-    noremap <leader># <Esc>:!shellcheck %<Enter>
+    nnoremap <leader>g :GitGutterToggle<Enter>
+    noremap <leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<Enter>
+
+    nnoremap <leader>b :make<Enter>
+    nnoremap <leader>B :make run<Enter>
+    nnoremap <leader># :!shellcheck %<Enter>
 
 
