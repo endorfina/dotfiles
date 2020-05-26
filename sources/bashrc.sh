@@ -50,12 +50,14 @@ remove_carriage_returns()
 
 todos()
 {
-    find "${1-.}" -type f -exec grep -H 'TODO:' '{}' '+'
+    local dir=${1-.}
+    shift
+    find "$dir" -type f "$@" -exec grep -H 'TODO:' '{}' '+'
 }
 
 edit_modified()
 {
-    git status --short | sed -En '/^M/{s~^[A-Z]+[[:space:]]*~~;p;}' | sort | uniq | xargs "echo"
+    git status --short | sed -En '/^M/{s~^[A-Z]+[[:space:]]*~~;p;}' | sort | uniq | xargs "$EDITOR"
 }
 
-. ~/.config/broot/launcher/bash/br
+[[ -f ~/.config/broot/launcher/bash/br ]] && . ~/.config/broot/launcher/bash/br
