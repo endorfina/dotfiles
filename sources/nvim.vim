@@ -74,6 +74,20 @@ endif
     nnoremap <leader>h :bp<Enter>
     nnoremap <leader>l :bn<Enter>
 
+" Faster scrolling
+    nnoremap <C-e> 4<C-e>
+    nnoremap <C-y> 4<C-y>
+
+" Keep selection
+    vnoremap < <gv
+    vnoremap > >gv
+
+" Save
+    nnoremap <leader><leader> :w<Enter>
+
+" Escape alias
+    inoremap jk <Esc>
+
 " Turn on spellchecking
     nnoremap <leader>L :set spell spelllang=en_us<Enter>
 
