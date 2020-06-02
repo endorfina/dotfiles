@@ -57,7 +57,7 @@ todos()
 
 edit_modified()
 {
-    git status --short | sed -En '/^M/{s~^[A-Z]+[[:space:]]*~~;p;}' | sort | uniq | xargs "$EDITOR"
+    git status --short | sed -En '/^[[:space:]]*M/{s~^[[:space:]]*[A-Z]+[[:space:]]*~~;p;}' | sort | uniq | xargs "$EDITOR"
 }
 
 [[ -f ~/.config/broot/launcher/bash/br ]] && . ~/.config/broot/launcher/bash/br
