@@ -11,6 +11,7 @@ Plug 'Valloric/YouCompleteMe', {'do': 'python3 install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/vim-emoji'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'tikhomirov/vim-glsl'
 call plug#end()
@@ -43,6 +44,9 @@ call plug#end()
 
 " Disable Ex mode
     nnoremap Q @q
+
+" Disable scratch buffer
+    set completeopt-=preview
 
 " Splits open at the bottom and right
     set splitbelow splitright
@@ -90,6 +94,9 @@ endif
 
 " Turn on spellchecking
     nnoremap <leader>L :set spell spelllang=en_us<Enter>
+
+" Launch fuzzy finder
+    nnoremap <leader>z :FZF<Enter>
 
 " Git commands
     nnoremap <leader>s :!git status<Enter>

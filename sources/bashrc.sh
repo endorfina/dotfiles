@@ -9,6 +9,7 @@ export LESSHISTFILE=$XDG_CACHE_HOME/less/history
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
+export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat
 
 export PATH=$PATH:$HOME/.local/bin
 [[ -d $CARGO_HOME/bin ]] && PATH=$CARGO_HOME/bin:$PATH
