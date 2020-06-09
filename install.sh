@@ -26,7 +26,7 @@ die()
 loud()
 {
     printf '+ %s\n' >&2 "$*"
-    "$@" | sed 's~^~  -- ~'
+    "$@"
 }
 
 message()
@@ -37,6 +37,9 @@ message()
 test "$USER" = root && die "This isn't really a sudo kind of business"
 
 cd "$(dirname "$0")" || die "Couldn't move to the root directory"
+
+kernel_name=$(uname -s)
+readonly kernel_name
 
 # deletes comments and empty lines
 sed -E \
@@ -60,7 +63,7 @@ do
         test -d "$dest_dirname" \
             || loud mkdir -p "$dest_dirname"
 
-        loud cp "$source_file" "$dest_file"
+        loud sed -Ee 's~[[:space:]]*%'"$kernel_name"'%$~~' -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
 
     else
 

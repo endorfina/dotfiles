@@ -7,12 +7,16 @@ window:
 
   decorations: full
 
-  startup_mode: Fullscreen
+  startup_mode: Fullscreen       # %Linux%
+  startup_mode: SimpleFullscreen # %Darwin%
 
   title: '🦩 hideout'
 
 scrolling:
   history: 0
+
+font:           # %Darwin%
+  size: 24.0    # %Darwin%
 
 colors:
   primary:
