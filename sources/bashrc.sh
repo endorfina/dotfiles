@@ -89,3 +89,4 @@ remove_carriage_returns()
 }
 
 [[ -f ~/.config/broot/launcher/bash/br ]] && . ~/.config/broot/launcher/bash/br ## %Linux%
+[[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && . ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ## %Darwin%
