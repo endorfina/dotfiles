@@ -71,7 +71,7 @@ endif
 
 " Netrw configuration
     autocmd FileType netrw nnoremap ? :help netrw-quickmap<Enter>
-    nnoremap <leader>x :e .<Enter>
+    nnoremap <leader>x :e %:h<Enter>
     let g:netrw_winsize = 25
 
 " Buffer navigation
@@ -115,10 +115,10 @@ endif
     vnoremap / /\v
 
     nnoremap <leader>g :GitGutterToggle<Enter>
-    noremap <leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<Enter>
+    noremap <leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<Enter>:let @/ = ""<Enter>
 
     nnoremap <leader>b :make<Enter>
-    nnoremap <leader>B :make run<Enter>
+    nnoremap <leader>B :w<Enter>:make<space>run<Enter> %Linux%
     nnoremap <leader># :!shellcheck %<Enter>
 
 
