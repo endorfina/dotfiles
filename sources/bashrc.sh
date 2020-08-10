@@ -41,6 +41,7 @@ alias ggd='git diff'
 alias ggdc='git diff --cached'
 alias ggl='git log'
 alias ggl1='git log --oneline'
+alias ggpr='git pull --rebase'
 alias ggsps='if git stash; then git pull -r; git stash apply; fi'
 alias ignore='echo >> .gitignore'
 

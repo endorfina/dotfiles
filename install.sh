@@ -10,10 +10,12 @@ then
   readonly ESC=$(printf '\033')'['
   readonly color_red=$ESC'1;31m'
   readonly color_blue=$ESC'1;34m'
+  readonly color_green=$ESC'0;32m'
   readonly color_norm=$ESC'0m'
 else
   readonly color_red=
   readonly color_blue=
+  readonly color_green=
   readonly color_norm=
 fi
 
@@ -25,13 +27,15 @@ die()
 
 loud()
 {
-    printf '+ %s\n' >&2 "$*"
+    printf '+ %s\n' "$*" | \
+        sed >&2 -E 's~e[[:space:]]+([s/])[^[:space:]]{3,}([^[:space:]])~e '"$color_green"'\1##\2'"$color_norm"'~g'
+
     "$@"
 }
 
 message()
 {
-    printf '[%s]\n' "$color_blue$*$color_norm"
+    printf '[%s]\n' "$color_blue$*$color_norm" | sed 's~'"'$HOME"'/~'"'"'\~/~'
 }
 
 test "$USER" = root && die "This isn't really a sudo kind of business"
@@ -56,7 +60,7 @@ do
 
     if test "$source_file" -nt "$dest_file"
     then
-        message "overwriting '$dest_file'"
+        message "writing '$dest_file'"
 
         dest_dirname=${dest_file%/*}
 
@@ -64,6 +68,8 @@ do
             || loud mkdir -p "$dest_dirname"
 
         loud sed -Ee 's~[[:space:]]*%'"$kernel_name"'%$~~' -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
+
+        test -x "$source_file" && loud chmod +x "$dest_file"
 
     else
 
