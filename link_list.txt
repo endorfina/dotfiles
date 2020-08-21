@@ -4,6 +4,8 @@ tmux.conf ^/tmux/tmux.conf
 nvim.vim ^/nvim/init.vim
 neovim_color_theme.vim ^/nvim/colors/cyber.vim
 
+init_home_repo.sh !/gg-home-init
+
 alacritty.yml ^/alacritty/alacritty.yml
 broot.toml ^/broot/conf.toml
 

@@ -30,6 +30,7 @@ alias lis='ls -lGh'
 
 ## Git functions ##
 
+alias ggi='git init -b trunk'
 alias ggs='git status'
 alias ggc='git commit'
 alias ggo='git checkout'
@@ -42,7 +43,7 @@ alias ggdc='git diff --cached'
 alias ggl='git log'
 alias ggl1='git log --oneline'
 alias ggpr='git pull --rebase'
-alias ggsps='if git stash; then git pull -r; git stash apply; fi'
+alias ggsps='git pull -r --autostash'
 alias ignore='echo >> .gitignore'
 
 ggpu()
