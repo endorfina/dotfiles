@@ -58,7 +58,7 @@ do
     source_file=sources/${line%% *}
     dest_file=${line#* }
 
-    if test "$source_file" -nt "$dest_file"
+    if test "$source_file" -nt "$dest_file" -o ! -f "$dest_file"
     then
         message "writing '$dest_file'"
 

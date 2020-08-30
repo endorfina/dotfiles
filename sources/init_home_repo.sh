@@ -7,7 +7,7 @@ then
 fi
 
 readonly host=$1
-readonly dir=${2%.git}.git
+readonly gitdir=${2%.git}.git
 
 foo()
 {
@@ -26,6 +26,6 @@ foo()
     || (echo "Failure. Deleting '$dir'"; rm -vrf "$dir"; exit 1)
 }
 
-ssh "$host" "$(declare -fp foo); foo '$dir'" \
-  && git remote -v add home "git@${host#*@}:repos/$dir"
+ssh "$host" "$(declare -fp foo); foo '$gitdir'" \
+  && git remote -v add home "git@${host#*@}:repos/$gitdir"
 

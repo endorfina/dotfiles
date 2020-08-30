@@ -5,6 +5,7 @@ nvim.vim ^/nvim/init.vim
 neovim_color_theme.vim ^/nvim/colors/cyber.vim
 
 init_home_repo.sh !/gg-home-init
+cam.sh !/webcam
 
 alacritty.yml ^/alacritty/alacritty.yml
 broot.toml ^/broot/conf.toml
