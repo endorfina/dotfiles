@@ -7,6 +7,7 @@ neovim_color_theme.vim ^/nvim/colors/cyber.vim
 init_home_repo.sh !/gg-home-init
 cam.sh !/webcam
 
+# emoji-font-fix.conf /etc/fonts/local.conf
 alacritty.yml ^/alacritty/alacritty.yml
 broot.toml ^/broot/conf.toml
 
