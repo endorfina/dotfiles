@@ -55,19 +55,28 @@ sed -E \
     "${1:-link_list.txt}" \
     | while read -r line
 do
+    condition_cmd=$(echo "$line" |\
+        sed -nE '/\$/{s~^[^$]*\$[[:space:]]*(if[[:space:]]+)?~~;p;q;}')
+
+    line=$(echo "$line" | sed -E 's~[[:space:]]*\$.*$~~')
+
     source_file=sources/${line%% *}
     dest_file=${line#* }
 
-    if test "$source_file" -nt "$dest_file" -o ! -f "$dest_file"
+    if test "$source_file" -nt "$dest_file" -o ! -f "$dest_file" \
+        && (test -z "$condition_cmd" \
+        || sh -c "$condition_cmd" >/dev/null 2>/dev/null)
     then
-        message "writing '$dest_file'"
+        message "writing to '$dest_file'"
 
         dest_dirname=${dest_file%/*}
 
         test -d "$dest_dirname" \
             || loud mkdir -p "$dest_dirname"
 
-        loud sed -Ee 's~[[:space:]]*%'"$kernel_name"'%$~~' -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
+        loud sed -E \
+            -e 's~[[:space:]]*%'"$kernel_name"'%$~~' \
+            -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
 
         test -x "$source_file" && loud chmod +x "$dest_file"
 

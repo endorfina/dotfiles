@@ -41,10 +41,10 @@ alias ggr='git restore'
 alias ggrs='git restore --staged'
 alias ggd='git diff'
 alias ggdc='git diff --cached'
+alias ggcp='git cherry-pick'
 alias ggl='git log'
 alias ggl1='git log --oneline'
-alias ggpr='git pull --rebase'
-alias ggsps='git pull -r --autostash'
+alias ggpr='git pull -r --autostash'
 alias ignore='echo >> .gitignore'
 
 ggpu()

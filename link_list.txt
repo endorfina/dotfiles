@@ -6,7 +6,7 @@ nvim.vim ^/nvim/init.vim
 neovim_color_theme.vim ^/nvim/colors/cyber.vim
 
 init_home_repo.sh !/gg-home-init
-cam.sh !/webcam
+cam.sh !/webcam $if test -e /dev/video0
 
 # emoji-font-fix.conf /etc/fonts/local.conf
 alacritty.yml ^/alacritty/alacritty.yml
