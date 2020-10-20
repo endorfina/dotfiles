@@ -24,7 +24,8 @@ export BROWSER=firefox
 alias dog='tail -n+1'
 alias :e='nvim 2>/dev/null'
 alias :bd='exit'
-alias ta='if tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf has &>/dev/null; then tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u attach && exit; else tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf -u && exit; fi'
+alias nice_tmux='tmux -2u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
+alias ta='if nice_tmux has &>/dev/null; then nice_tmux attach && exit; else nice_tmux && exit; fi'
 alias neofetch='clear && echo && neofetch | sed "s~'"$USER"'.*$~[DATA EXPUNGED]~"'
 alias lis='ls -lGh'
 
