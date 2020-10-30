@@ -48,6 +48,17 @@ alias ggl1='git log --oneline'
 alias ggpr='git pull -r --autostash'
 alias ignore='echo >> .gitignore'
 
+is_in_path()
+{
+    while [[ $# -gt 0 ]]
+    do
+        command -v "$1" &>/dev/null || return 1
+        shift
+    done
+}
+
+is_in_path kstart5 && alias restart_plasma='kquitapp5 plasmashell && kstart5 plasmashell' ## %Linux%
+
 ggpu()
 {
     local branch
@@ -56,12 +67,15 @@ ggpu()
     git push -v -u "${1:-origin}" "$branch"
 }
 
-ggph()
+ggpa()
 {
     local branch
     branch=$(git branch --no-color --show-current) || return 1
 
-    git push && git push -v home "$branch"
+    git remote | while read -r remote
+    do
+        git push -v "$remote" "$branch"
+    done
 }
 
 ggem()

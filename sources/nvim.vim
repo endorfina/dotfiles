@@ -100,11 +100,11 @@ endif
 
 " Git commands
     nnoremap <leader>s :!git status<Enter>
-    nnoremap <leader>r :!git restore --staged %<Enter>
-    nnoremap <leader>R :!git restore %<Enter>
-    nnoremap <leader>d :!git diff %<Enter>
-    nnoremap <leader>c :!git diff --cached %<Enter>
-    nnoremap <leader>a :!git add %<Enter>
+    nnoremap <leader>r :!git restore --staged '%'<Enter>
+    nnoremap <leader>R :!git restore '%'<Enter>
+    nnoremap <leader>d :!git diff '%'<Enter>
+    nnoremap <leader>c :!git diff --cached '%'<Enter>
+    nnoremap <leader>a :!git add '%'<Enter>
     nnoremap <leader>u :!git add -u<Enter>
 
 " Comment
@@ -119,6 +119,6 @@ endif
 
     nnoremap <leader>b :make<Enter>
     nnoremap <leader>B :w<Enter>:make<space>run<Enter> %Linux%
-    nnoremap <leader># :!shellcheck %<Enter>
+    nnoremap <leader># :!shellcheck '%'<Enter>
 
 
