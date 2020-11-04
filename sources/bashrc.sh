@@ -58,6 +58,7 @@ is_in_path()
 }
 
 is_in_path kstart5 && alias restart_plasma='kquitapp5 plasmashell && kstart5 plasmashell' ## %Linux%
+is_in_path pacman && alias remove_orphans='pacman -Qtdq | sudo pacman -Rns' ## %Linux%
 
 ggpu()
 {

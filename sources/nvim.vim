@@ -1,4 +1,4 @@
-let mapleader =" "
+let mapleader = " "
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -111,8 +111,8 @@ endif
     noremap <leader>/ I// <Esc>
 
 " Use extended regex
-    nnoremap / /\v
-    vnoremap / /\v
+    " nnoremap / /\v
+    " vnoremap / /\v
 
     nnoremap <leader>g :GitGutterToggle<Enter>
     noremap <leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<Enter>:let @/ = ""<Enter>
