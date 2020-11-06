@@ -27,7 +27,7 @@ alias :bd='exit'
 alias nice_tmux='tmux -2u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
 alias ta='if nice_tmux has &>/dev/null; then nice_tmux attach && exit; else nice_tmux && exit; fi'
 alias neofetch='clear && echo && neofetch | sed "s~'"$USER"'.*$~[DATA EXPUNGED]~"'
-alias lis='ls -lGh'
+alias lls='ls -lGh'
 
 ## Git functions ##
 
