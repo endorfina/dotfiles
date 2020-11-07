@@ -61,6 +61,6 @@ colors:
 
   indexed_colors: []
 
-background_opacity: 0.70
+background_opacity: 0.80
 
 live_config_reload: false

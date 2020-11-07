@@ -11,6 +11,8 @@ export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat
 
+set -o ignoreeof -o vi
+
 [[ -d $HOME/.local/bin && ! $PATH == *$HOME/.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
 [[ -d $CARGO_HOME/bin  && ! $PATH == *$CARGO_HOME/bin* ]]  && export PATH=$CARGO_HOME/bin:$PATH
 
