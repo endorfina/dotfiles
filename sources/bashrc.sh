@@ -47,6 +47,7 @@ alias ggdc='git diff --cached'
 alias ggcp='git cherry-pick'
 alias ggl='git log'
 alias ggl1='git log --oneline'
+alias ggpv='git push -v'
 alias ggpr='git pull -r --autostash'
 alias ignore='echo >> .gitignore'
 
@@ -92,7 +93,9 @@ ggem()
 
 todos()
 {
-    find . -type f -name "${1:-*}" -exec grep -H 'TODO:' '{}' '+' | sed 's~^\./~~'
+    local filter=${1:-*}
+    shift
+    find . -type f -name "$filter" "$@" -exec grep -H 'TODO:' '{}' '+' | sed 's~^\./~~'
 }
 
 remove_carriage_returns()
