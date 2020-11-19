@@ -86,7 +86,10 @@ ggem()
 {
     echo -n '📝 ' >&2
     [[ $# -eq 0 ]] && set -- cat -
-    git status --short | sed -En '/^[[:space:]]*M/{s~^[[:space:]]*[A-Z]+[[:space:]]*~~;p;}' | sort | uniq | "$@" | xargs -p "$EDITOR"
+    git status --short \
+        | sed -En '/^[[:space:]A-Z][AMU]/{s~^[[:space:]]*[A-Z]+[[:space:]]*~~;p;}' \
+        | sort | uniq \
+        | "$@" | xargs -p "$EDITOR"
 }
 
 ## Others ##
