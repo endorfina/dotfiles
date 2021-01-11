@@ -51,6 +51,14 @@ alias ggpv='git push -v'
 alias ggpr='git pull -r --autostash'
 alias ignore='echo >> .gitignore'
 
+alias myip='curl ipinfo.io/ip'
+alias ports='netstat -tulanp'
+alias untar='tar -zxvf'
+alias sha='shasum -a 256'
+alias yt='youtube-dl --add-metadata -i'
+alias yta='yt -x -f bestaudio/best'
+alias shut='sudo shutdown -h now'
+
 is_in_path()
 {
     while [[ $# -gt 0 ]]
@@ -61,7 +69,20 @@ is_in_path()
 }
 
 is_in_path kstart5 && alias restart_plasma='kquitapp5 plasmashell && kstart5 plasmashell' ## %Linux%
-is_in_path pacman && alias remove_orphans='pacman -Qtdq | sudo pacman -Rns' ## %Linux%
+
+is_in_path pacman && \
+remove_orphans()
+{
+    local iter packages=()
+
+    while read -r iter
+    do
+        packages+=("$iter")
+
+    done < <(pacman -Qtdq)
+
+    [[ ${#packages[*]} -gt 0 ]] && sudo pacman -Rns "${packages[@]}"
+}
 
 ggpu()
 {
