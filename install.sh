@@ -71,12 +71,21 @@ do
 
         dest_dirname=${dest_file%/*}
 
+        test -f "$dest_file" \
+            && cp "$dest_file" "$dest_file.bak"
+
         test -d "$dest_dirname" \
             || loud mkdir -p "$dest_dirname"
 
         loud sed -E \
             -e 's~[[:space:]]*%'"$kernel_name"'%$~~' \
             -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
+
+        if test -f "$dest_file.bak"
+        then
+            command -v colordiff >/dev/null && colordiff "$dest_file.bak" "$dest_file"
+            rm "$dest_file.bak"
+        fi
 
         test -x "$source_file" && loud chmod +x "$dest_file"
 
