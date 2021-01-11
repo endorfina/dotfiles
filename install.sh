@@ -7,22 +7,40 @@ readonly PROGNAME=${0##*/}
 
 if test -t 1 -a -t 2
 then
-  readonly ESC=$(printf '\033')'['
-  readonly color_red=$ESC'1;31m'
-  readonly color_blue=$ESC'1;34m'
-  readonly color_green=$ESC'0;32m'
-  readonly color_norm=$ESC'0m'
+    readonly ESC=$(printf '\033')'['
+    readonly color_red=$ESC'0;31m'
+    readonly color_cyan=$ESC'0;36m'
+    readonly color_blue=$ESC'1;34m'
+    readonly color_green=$ESC'0;32m'
+    readonly color_norm=$ESC'0m'
 else
-  readonly color_red=
-  readonly color_blue=
-  readonly color_green=
-  readonly color_norm=
+    readonly color_red=
+    readonly color_cyan=
+    readonly color_blue=
+    readonly color_green=
+    readonly color_norm=
 fi
 
 die()
 {
-  printf >&2 '💀 %s\n' "${color_red}${PROGNAME} !!${color_norm} $*"
-  exit 1
+    printf >&2 '💀 %s\n' "${color_red}${PROGNAME} !!${color_norm} $*"
+    exit 1
+}
+
+show_diff()
+{
+    if command -v colordiff >/dev/null
+    then
+        colordiff -w "$1" "$2"
+
+    else
+        diff -w "$1" "$2" \
+            | sed -E \
+            -e "s~^(<.*)$~${color_red}\\1$color_norm~" \
+            -e "s~^(>.*)$~${color_green}\\1$color_norm~" \
+            -e "s~^([[:digit:]].*)$~${color_cyan}\\1$color_norm~" \
+            -e 's~^~ ~'
+    fi
 }
 
 loud()
@@ -35,7 +53,7 @@ loud()
 
 message()
 {
-    printf '[%s]\n' "$color_blue$*$color_norm" | sed 's~'"'$HOME"'/~'"'"'\~/~'
+    printf '%s\n' ":$color_blue$*$color_norm" | sed 's~'"'$HOME"'/~'"'"'\~/~'
 }
 
 test "$USER" = root && die "This isn't really a sudo kind of business"
@@ -83,7 +101,7 @@ do
 
         if test -f "$dest_file.bak"
         then
-            command -v colordiff >/dev/null && colordiff "$dest_file.bak" "$dest_file"
+            show_diff "$dest_file.bak" "$dest_file"
             rm "$dest_file.bak"
         fi
 
