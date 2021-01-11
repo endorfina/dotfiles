@@ -81,36 +81,39 @@ do
     source_file=sources/${line%% *}
     dest_file=${line#* }
 
-    if test "$source_file" -nt "$dest_file" -o ! -f "$dest_file" \
-        && (test -z "$condition_cmd" \
-        || sh -c "$condition_cmd" >/dev/null 2>/dev/null)
+    if test -n "$condition_cmd" && ! FILE="$dest_file" sh -c "$condition_cmd"
     then
-        message "writing to '$dest_file'"
-
-        dest_dirname=${dest_file%/*}
-
-        test -f "$dest_file" \
-            && cp "$dest_file" "$dest_file.bak"
-
-        test -d "$dest_dirname" \
-            || loud mkdir -p "$dest_dirname"
-
-        loud sed -E \
-            -e 's~[[:space:]]*%'"$kernel_name"'%$~~' \
-            -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
-
-        if test -f "$dest_file.bak"
-        then
-            show_diff "$dest_file.bak" "$dest_file"
-            rm "$dest_file.bak"
-        fi
-
-        test -x "$source_file" && loud chmod +x "$dest_file"
-
-    else
-
-        message "skipping '$dest_file'"
+        message "unavailable '$dest_file'"
+        continue
     fi
+
+    if test -f "$dest_file" -a ! "$source_file" -nt "$dest_file"
+    then
+        message "skipping '$dest_file'"
+        continue
+    fi
+
+    message "writing to '$dest_file'"
+
+    dest_dirname=${dest_file%/*}
+
+    test -f "$dest_file" \
+        && cp "$dest_file" "$dest_file.bak"
+
+    test -d "$dest_dirname" \
+        || loud mkdir -p "$dest_dirname"
+
+    loud sed -E \
+        -e 's~[[:space:]]*%'"$kernel_name"'%$~~' \
+        -e '/%[[:alpha:]]+%$/d' "$source_file" > "$dest_file"
+
+    if test -f "$dest_file.bak"
+    then
+        show_diff "$dest_file.bak" "$dest_file"
+        rm "$dest_file.bak"
+    fi
+
+    test -x "$source_file" && loud chmod +x "$dest_file"
 done
 
 message 'done'
