@@ -11,7 +11,7 @@ readonly gitdir=${2%.git}.git
 
 foo()
 {
-  dir=~git/repos/$1
+  dir=~git/r/$1
 
   if test -d "$dir"
   then
@@ -27,5 +27,5 @@ foo()
 }
 
 ssh "$host" "$(declare -fp foo); foo '$gitdir'" \
-  && git remote -v add home "git@${host#*@}:repos/$gitdir"
+  && git remote -v add home "git@${host#*@}:r/$gitdir"
 

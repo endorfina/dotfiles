@@ -4,6 +4,7 @@ tmux.conf ^/tmux/tmux.conf
 ranger.conf ^/ranger/rc.conf
 nvim.vim ^/nvim/init.vim
 neovim_color_theme.vim ^/nvim/colors/cyber.vim
+ble-conf.sh ^/blesh/init.sh
 
 init_home_repo.sh !/gg-home-init
 cam.sh !/webcam $if test -e /dev/video0

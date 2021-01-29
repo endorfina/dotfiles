@@ -1,0 +1,3 @@
+[submodule "extern/ble.sh"]
+	path = extern/ble.sh
+	url = https://github.com/akinomyoga/ble.sh.git

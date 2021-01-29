@@ -11,10 +11,12 @@ export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat
 
+[[ -f ~/.local/share/blesh/ble.sh && $- == *i* ]] && . ~/.local/share/blesh/ble.sh --noattach ## %Linux%
+
 set -o ignoreeof -o vi
 
-[[ -d $HOME/.local/bin && ! $PATH == *$HOME/.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
-[[ -d $CARGO_HOME/bin  && ! $PATH == *$CARGO_HOME/bin* ]]  && export PATH=$CARGO_HOME/bin:$PATH
+[[ -d $HOME/.local/bin && ! :$PATH: == *:$HOME/.local/bin:* ]] && export PATH=$PATH:$HOME/.local/bin
+[[ -d $CARGO_HOME/bin  && ! :$PATH: == *:$CARGO_HOME/bin:* ]]  && export PATH=$CARGO_HOME/bin:$PATH
 
 export VISUAL=nvim
 export EDITOR=$VISUAL
@@ -58,6 +60,8 @@ alias sha='shasum -a 256'
 alias yt='youtube-dl --add-metadata -i'
 alias yta='yt -x -f bestaudio/best'
 alias shut='sudo shutdown -h now'
+alias ex="exa -l --git"
+alias todos="rg 'TODOS:'"
 
 is_in_path()
 {
@@ -69,6 +73,7 @@ is_in_path()
 }
 
 is_in_path kstart5 && alias restart_plasma='kquitapp5 plasmashell && kstart5 plasmashell' ## %Linux%
+is_in_path visudo && alias visudo="sudo EDITOR=${EDITOR} visudo" ## %Linux%
 
 is_in_path pacman && \
 remove_orphans()
@@ -115,13 +120,6 @@ ggem()
 
 ## Others ##
 
-todos()
-{
-    local filter=${1:-*}
-    shift
-    find . -type f -name "$filter" "$@" -exec grep -H 'TODO:' '{}' '+' | sed 's~^\./~~'
-}
-
 remove_carriage_returns()
 {
     local filter=${1:-*.?pp}
@@ -138,3 +136,10 @@ remove_carriage_returns()
 
 [[ -f ~/.config/broot/launcher/bash/br ]] && . ~/.config/broot/launcher/bash/br ## %Linux%
 [[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && . ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ## %Darwin%
+
+if [[ -n ${BLE_VERSION-} ]]
+then
+    [[ $USER = 'endorfina' ]] && export PS1="\[\e[0;35m\]🦩\[\e[1;32m\]\$\[\e[0m\] " ## %Linux%
+
+    ble-attach
+fi
