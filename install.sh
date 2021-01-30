@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# (ɔ) 2020 endorfina <dev.endorfina@outlook.com>
+# (ɔ) 2021 endorfina <dev.endorfina@outlook.com>
 # WTFPL
 
 readonly PROGNAME=${0##*/}

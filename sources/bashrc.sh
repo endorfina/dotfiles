@@ -11,7 +11,7 @@ export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat
 
-[[ -f ~/.local/share/blesh/ble.sh && $- == *i* ]] && . ~/.local/share/blesh/ble.sh --noattach ## %Linux%
+[[ -f ~/.local/share/blesh/ble.sh && $- == *i* ]] && . ~/.local/share/blesh/ble.sh --noattach
 
 set -o ignoreeof -o vi
 
@@ -31,7 +31,6 @@ alias :bd='exit'
 alias nice_tmux='tmux -2u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
 alias ta='if nice_tmux has &>/dev/null; then nice_tmux attach && exit; else nice_tmux && exit; fi'
 alias neofetch='clear && echo && neofetch | sed "s~'"$USER"'.*$~[DATA EXPUNGED]~"'
-alias lls='ls -lGh'
 
 ## Git functions ##
 
@@ -60,7 +59,6 @@ alias sha='shasum -a 256'
 alias yt='youtube-dl --add-metadata -i'
 alias yta='yt -x -f bestaudio/best'
 alias shut='sudo shutdown -h now'
-alias ex="exa -l --git"
 alias todos="rg 'TODOS:'"
 
 is_in_path()
@@ -72,8 +70,18 @@ is_in_path()
     done
 }
 
+if [[ $- == *i* ]]
+then
+    is_in_path exa && alias ls="exa -l --git"
+fi
+
 is_in_path kstart5 && alias restart_plasma='kquitapp5 plasmashell && kstart5 plasmashell' ## %Linux%
-is_in_path visudo && alias visudo="sudo EDITOR=${EDITOR} visudo" ## %Linux%
+
+if is_in_path visudo
+then
+    alias visudo="sudo SUDO_EDITOR=$VISUAL visudo"
+    alias visudo.d="sudo SUDO_EDITOR=$VISUAL find /etc/sudoers.d -type f -exec visudo -f '{}' ';'"
+fi
 
 is_in_path pacman && \
 remove_orphans()
