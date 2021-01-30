@@ -37,6 +37,7 @@ test "$USER" = root && die "This isn't really a sudo kind of business"
 
 cd "$(dirname "$0")" || die "Couldn't move to the root directory"
 
-loud git submodule update --init --recursive ble.sh \
+(set -- ble.sh/* ; test -e "$1" \
+    || loud git submodule update --init --recursive --depth 1 ble.sh) \
     && loud make -C ble.sh install PREFIX=~/.local
 
