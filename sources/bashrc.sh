@@ -28,8 +28,10 @@ export BROWSER=firefox
 alias dog='tail -n+1'
 alias :e='nvim 2>/dev/null'
 alias :bd='exit'
-alias nice_tmux='tmux -2u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
-alias ta='if nice_tmux has &>/dev/null; then nice_tmux attach && exit; else nice_tmux && exit; fi'
+alias u_tmux='tmux -2u -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
+alias attach_tmux='u_tmux attach && exit'
+alias start_tmux='[[ -d /var/love ]] && cd /var/love ; u_tmux && exit'
+alias ta='if u_tmux has >/dev/null; then attach_tmux; else start_tmux; fi'
 alias neofetch='clear && echo && neofetch | sed "s~'"$USER"'.*$~[DATA EXPUNGED]~"'
 
 ## Git functions ##
@@ -73,6 +75,13 @@ is_in_path()
 if [[ $- == *i* ]]
 then
     is_in_path exa && alias ls="exa -l --git"
+fi
+
+if is_in_path col bat
+then
+    export MANPAGER='sh -c "col -bx | bat -l man -p"'
+else
+    export MANPAGER='nvim -c "set ft=man" -'
 fi
 
 is_in_path kstart5 && alias restart_plasma='kquitapp5 plasmashell && kstart5 plasmashell' ## %Linux%
