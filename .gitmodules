@@ -1,3 +1,6 @@
 [submodule "extern/ble.sh"]
 	path = extern/ble.sh
 	url = https://github.com/akinomyoga/ble.sh.git
+[submodule "extern/hosts"]
+	path = extern/hosts
+	url = https://github.com/StevenBlack/hosts
